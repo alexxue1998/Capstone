@@ -41,8 +41,13 @@ Postal Code:https://en.wikipedia.org/wiki/List_of_postal_codes_of_Canada:_M
 
 Environment:
 conda create -n Recommender_capstone python=3.8 numpy pandas scipy scikit-learn=0.24.1 jupyter jupyterlab seaborn
+
 conda activate Recommender_capstone
+
 conda install -c conda-forge scikit-surprise=1.1.1
+
 conda install -c plotly 
+
 If no nbkernals 
+
     ipython kernel install --name "Recommender_capstone" --user

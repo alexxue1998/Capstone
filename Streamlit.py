@@ -164,7 +164,7 @@ dataframe = None
 st.title("""
 Your Personalized Travel Food Guide
  """)
-st.header('This is an Content-Based Recommender System for restaurants in Toronto and Las Vegas made from the Yelp 2018 Dataset. :smile:')
+st.header('This is an Content-Based Recommender System for restaurants in Toronto and Las Vegas made from the Yelp 2018 Dataset. :sparkles:')
 
 
 st.text("")
@@ -172,23 +172,27 @@ st.text("")
 st.text("")
 st.text("")
 
-session.options = st.multiselect(label="Select Restaurants",options=restaurant_list)
+col2, col3 = st.columns(2)
 
-option = st.selectbox(
-    'Where would you like recommendations?',
-    ('Toronto', 'Las Vegas', 'Both'))
+with col2:
+    st.subheader('This is where you input your favourite restaurants! :sushi: :pizza: :ramen: ')
+    session.options = st.multiselect(label="Select Restaurants",options=restaurant_list)
 
-if option == 'Toronto':
-    state_choice='ON'
-elif option == 'Las Vegas':
-    state_choice='NV'
-else:
-    state_choice='all'
+    option = st.selectbox(
+        'Where would you like recommendations?',
+        ('Toronto', 'Las Vegas', 'Both'))
 
-num_recs = st.slider('How many recommendations would you like?', 5, 50, 10)
+    if option == 'Toronto':
+        state_choice='ON'
+    elif option == 'Las Vegas':
+        state_choice='NV'
+    else:
+        state_choice='all'
+
+    num_recs = st.slider('How many recommendations would you like?', 5, 50, 10)
 
 
-buffer1, col1, buffer2 = st.columns([1.45, 1, 1])
+buffer1, col1, buffer2 = st.columns([0.5, 1, 1])
 is_clicked = col1.button(label="Recommend")
 
 if is_clicked:
@@ -206,5 +210,7 @@ if is_clicked:
 
 
     df_user=user_creation(user_dict,knn_model,df_X_train_PCA,df_business_final)
-    dataframe=scaling_by_rating(user_dict,df_user,num_recommendations=num_recs,state=state_choice)
-    st.table(dataframe)
+    with col3:
+        st.subheader("These are your curated recommendations! I hope you enjoy :white_check_mark: ")
+        dataframe=scaling_by_rating(user_dict,df_user,num_recommendations=num_recs,state=state_choice)
+        st.table(dataframe)
