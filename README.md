@@ -1,5 +1,10 @@
 READ ME CAPSTONE RECOMMENDER SYSTEM
 
+
+The Yelp 2018 Dataset is required for this project. The data folder can be found at: 
+https://drive.google.com/drive/folders/19aUxpSdPZ97Y9j8hw28KhkxYDpIk3EOW?usp=sharing
+
+
 Capstone:
 Contains:
 - Introduction to the Project
@@ -23,10 +28,15 @@ Capstone appendix:
 
 References:
 Haversine Distance: https://towardsdatascience.com/heres-how-to-calculate-distance-between-2-geolocations-in-python-93ecab5bbba4
+
 Parameters gridsearch with itertools: https://www.sitmo.com/grid-searching-for-optimal-hyperparameters-with-itertools/
+
 Yelp Marketshare:https://csimarket.com/stocks/compet_glance.php?code=YELP
+
 Tourist number: https://ourworldindata.org/tourism
+
 Data can be found at https://drive.google.com/drive/folders/1C1nTfQLyJBekoo7q6QuOYXhF78JO_Urb?usp=share_link
+
 Postal Code:https://en.wikipedia.org/wiki/List_of_postal_codes_of_Canada:_M
 
 Environment:
