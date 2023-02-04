@@ -11,7 +11,7 @@ def name_to_index(list_of_restaurants,dataframe_with_name):
         index_list.append(res_index)
     return index_list
 
-def scaling_by_rating(user_dict,unscaled_df,num_recommendations=10,state='all'):
+def scaling_by_rating(user_dict,unscaled_df,num_recommendations=10,state='all',cusine='all'):
     """
     This function aims to scale the column similarity based on the rating given to the restaurant 
     
@@ -35,9 +35,12 @@ def scaling_by_rating(user_dict,unscaled_df,num_recommendations=10,state='all'):
     #Sorting by Ontario or Nevada
     if state == 'ON' or state == 'NV':
         unscaled_df=unscaled_df[unscaled_df['state'].str.contains(state)]
+
+    if cusine!= 'all':
+        unscaled_df=unscaled_df[unscaled_df[cusine]==1]
     
     #Dropping unnecessary columns
-    unscaled_df=unscaled_df.drop(columns=['name','state'])
+    unscaled_df=unscaled_df.drop(columns=['name','state','chinese','brunch','italian','japanese','indian','mexican','thai'])
     
     #making min -> max ranking change to max->min ranking 
     for i in range(0,len(unscaled_df.columns)):
@@ -94,7 +97,7 @@ def user_creation(user,algo,df_trained,df_name_stored):
     """
     
     #creating the user_df 
-    user_df=df_name_stored[['name','state']]
+    user_df=df_name_stored[['name','state','chinese','brunch','italian','japanese','indian','mexican','thai']]
     index_list=[]
     #for loop over the indexes in the user input
     for index in user:
@@ -191,6 +194,10 @@ with col2:
 
     num_recs = st.slider('How many recommendations would you like?', 5, 50, 10)
 
+    option2 = st.selectbox(
+        'What type of food would you like?',
+        ('all','brunch','chinese','japanese','indian','italian','mexican','thai'))
+
 
 buffer1, col1, buffer2 = st.columns([0.5, 1, 1])
 is_clicked = col1.button(label="Recommend")
@@ -212,5 +219,6 @@ if is_clicked:
     df_user=user_creation(user_dict,knn_model,df_X_train_PCA,df_business_final)
     with col3:
         st.subheader("These are your curated recommendations! I hope you enjoy :white_check_mark: ")
-        dataframe=scaling_by_rating(user_dict,df_user,num_recommendations=num_recs,state=state_choice)
+        dataframe=scaling_by_rating(user_dict,df_user,num_recommendations=num_recs,state=state_choice,cusine=option2)
+        dataframe.drop(columns='Result',inplace=True)
         st.table(dataframe)
