@@ -138,7 +138,7 @@ def load_data():
     load and cache data
     :return: tfidf data
     """
-    PCA_dataframe = pd.read_csv("data/df_X_train_PCA.csv",index_col=0)
+    PCA_dataframe = pd.read_csv("data_streamlit/df_X_train_PCA.csv",index_col=0)
     return PCA_dataframe
 
 
@@ -150,7 +150,7 @@ def load_data2():
     load and cache data
     :return: tfidf data
     """
-    PCA_dataframe = pd.read_csv("data/df_final.csv", index_col=0)
+    PCA_dataframe = pd.read_csv("data_streamlit/df_final.csv", index_col=0)
     return PCA_dataframe
 
 
